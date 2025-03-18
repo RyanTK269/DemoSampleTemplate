@@ -6,23 +6,21 @@ using System.Text;
 
 namespace DemoSampleTemplate.Core.Exceptions.HttpRequests
 {
-    public class BaseRequestException : Exception
+    [Serializable]
+    public abstract class BaseRequestException : Exception
     {
-        public BaseRequestException() : base() { }
+        private int _httpStatusCode;
+        private string _errorCode;
 
-        public BaseRequestException(string message) : base(message) { }
-
-        public BaseRequestException(string message, string errorCode = "", int statusCode = StatusCodes.Status500InternalServerError) : base(message)
+        protected BaseRequestException(string message = "", string errorCode = "ERR", int httpStatusCode = StatusCodes.Status500InternalServerError, Exception? exception = null)
+            : base(message, exception)
         {
-            _httpStatusCode = statusCode;
-            _errorCode = errorCode;
+            this._httpStatusCode = httpStatusCode;
+            this._errorCode = errorCode;
         }
 
-
-        public int StatusCode { get => _httpStatusCode; }
-        public string ErrorCode { get => _errorCode; }
-
-        private int _httpStatusCode;
-        private string _errorCode = string.Empty;
+        public virtual int HttpStatusCode { get => this._httpStatusCode; }
+        public virtual string ErrorCode { get => this._errorCode; set => this._errorCode = value; }
+        public virtual string ErrorMessage { get => string.Format("{0} - {1}", this.ErrorCode, this.Message); }
     }
 }

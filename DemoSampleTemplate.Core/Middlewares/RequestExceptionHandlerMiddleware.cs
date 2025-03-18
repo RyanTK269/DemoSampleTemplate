@@ -44,9 +44,14 @@ namespace DemoSampleTemplate.Core.Middlewares
 
                 switch (ex)
                 {
-                    case BaseRequestException e:
-                        response.StatusCode = (int)e.StatusCode;
-                        responseModel.ErrorCode = e.ErrorCode;
+                    case BaseRequestException baseEx:
+                        responseModel = new ResponseModel
+                        {
+                            ErrorCode = baseEx.ErrorCode,
+                            Message = baseEx.ErrorMessage,
+                            Details = ex?.InnerException?.Message
+                        };
+                        response.StatusCode = baseEx.HttpStatusCode;
                         break;
                     default:
                         response.StatusCode = StatusCodes.Status500InternalServerError;
@@ -57,7 +62,7 @@ namespace DemoSampleTemplate.Core.Middlewares
             }
             finally
             {
-                _logger.LogInformation(string.Format("Path: {0} - Method: {1} - Ended", context.Request.Path, context.Request.Method));
+                _logger.LogInformation(string.Format("Path: {0} - Method: {1} - Finished", context.Request.Path, context.Request.Method));
             }
         }
     }

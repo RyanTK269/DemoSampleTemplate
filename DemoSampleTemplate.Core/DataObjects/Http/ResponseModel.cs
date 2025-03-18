@@ -8,6 +8,6 @@ namespace DemoSampleTemplate.Core.DataObjects.Http
     {
         public string Message { get; set; } = string.Empty;
         public string ErrorCode { get; set; } = string.Empty;
-        public string Details { get; set; } = string.Empty;
+        public string? Details { get; set; } = string.Empty;
     }
 }
