@@ -12,7 +12,7 @@ namespace DemoSampleTemplate.Service
             {
                 BaseRequestException apiEx => new ProblemDetails
                 {
-                    Status = (int)apiEx.StatusCode,
+                    Status = apiEx.HttpStatusCode,
                     Type = apiEx.GetType().Name,
                     Title = apiEx.Message,
                     Detail = apiEx.Message,
