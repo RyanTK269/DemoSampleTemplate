@@ -1,4 +1,5 @@
 ﻿using DemoSampleTemplate.Core.Exceptions;
+using DemoSampleTemplate.Core.Exceptions.HttpRequests;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DemoSampleTemplate.Controllers
@@ -15,7 +16,7 @@ namespace DemoSampleTemplate.Controllers
         [HttpGet("TestError")]
         public IActionResult TestError()
         {
-            throw new BaseRequestException("Test exception", "ERR001");
+            throw new BadRequestException("Test exception", "ERR001");
         }
 
         [HttpGet("TestCompressResponse")]
