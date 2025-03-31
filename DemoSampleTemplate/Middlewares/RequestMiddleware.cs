@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DemoSampleTemplate.Service
+namespace DemoSampleTemplate.Middlewares
 {
     public class RequestMiddleware : IExceptionHandler
     {
@@ -23,7 +23,7 @@ namespace DemoSampleTemplate.Service
                     Status = StatusCodes.Status500InternalServerError,
                     Type = exception.GetType().Name,
                     Title = "Internal server error",
-                    Detail = "Internal server error",
+                    Detail = exception.Message,
                     Instance = $"{httpContext.Request.Method} {httpContext.Request.Path}"
                 }
             };
