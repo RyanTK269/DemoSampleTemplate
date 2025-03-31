@@ -1,7 +1,6 @@
 ﻿using DemoSampleTemplate.Core.Exceptions;
 using DemoSampleTemplate.Core.Middlewares;
 using DemoSampleTemplate.Middlewares;
-using DemoSampleTemplate.Service;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
